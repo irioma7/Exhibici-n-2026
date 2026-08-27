@@ -64,6 +64,9 @@ const IDX_KEY       = 'irioma-nino-INDEX';
     <input type="text" id="ni" placeholder="Tu nombre (ej: Alina)" autocomplete="off"/>
     <div id="ni-err" style="display:none;color:#EF4444;font-size:12px;margin-top:4px;">Ingresá tu nombre primero</div>
     <button class="bt bt-tl" onclick="doSearch()" style="margin-top:12px;">Buscar mi foto →</button>
+    <div style="text-align:center;margin-top:20px;">
+      <span id="adm-dot" style="color:#D1D5DB;font-size:11px;cursor:default;user-select:none;">·</span>
+    </div>
   </div>
 </div>
 
@@ -302,10 +305,23 @@ function parse(fn){
 
 // ── Logo taps (admin access) ────────────────────────────
 // Admin: entrar via ?admin en la URL o 5 clics en el logo
-if(window.location.hash==='#admin'){
-  window.history.replaceState({},'',window.location.pathname);
-  go('al');
-}
+setTimeout(()=>{
+  if(window.location.hash.includes('admin')){
+    window.history.replaceState({},'',window.location.pathname);
+    go('al');
+  }
+},150);
+// Punto secreto admin
+let dotTaps=0,dotTimer=null;
+document.addEventListener('DOMContentLoaded',()=>{
+  const dot=document.getElementById('adm-dot');
+  if(dot) dot.addEventListener('click',()=>{
+    dotTaps++;
+    if(dotTimer)clearTimeout(dotTimer);
+    dotTimer=setTimeout(()=>dotTaps=0,2000);
+    if(dotTaps>=3){dotTaps=0;go('al');}
+  });
+});
 let tapTimer=null;
 document.getElementById('logo').addEventListener('mousedown',()=>{
   st.taps++;
@@ -576,12 +592,12 @@ async function delEntry(i){
 <div id="s-ci" class="sc" style="background:#065F4C;">
   <div class="crd" style="text-align:center;">
     <div style="font-size:44px;margin-bottom:12px;">✉️</div>
-    <h2 style="font-size:21px;font-weight:800;color:#065F4C;margin-bottom:8px;">Una carta para tu yo del futuro</h2>
+    <h2 style="font-size:21px;font-weight:800;color:#065F4C;margin-bottom:8px;">Una carta a tu niño interior</h2>
     <p style="color:#6B7280;font-size:14px;line-height:1.7;margin-bottom:16px;">
-      Tenés un minuto para escribirte una carta que vas a leer el proximo Día del Niño. Solo vos la vas a ver — la guardaremos en tu calendario.
+      Contale a ese niño en la foto todo lo que has logrado. Y prometele tus próximos 3 planes.
     </p>
     <div style="background:#E6F4F1;border-radius:11px;padding:12px 14px;margin-bottom:18px;text-align:left;">
-      <div style="color:#065F4C;font-size:13px;line-height:1.6;">El recordatorio llega exactamente un año después, el <strong>Día del Niño 2027</strong>, con tu carta adentro.</div>
+      <div style="color:#065F4C;font-size:13px;line-height:1.6;">En el <strong>Día del Niño 2027</strong> recibirás un recordatorio con tu carta — y te preguntará si cumpliste tus 3 planes. 🎯</div>
     </div>
     <button class="bt bt-tl" onclick="go('carta')">Escribir mi carta →</button>
     <button class="bt bt-out" onclick="go('fin')">Omitir por ahora</button>
@@ -597,23 +613,31 @@ async function delEntry(i){
   <div style="padding:16px;max-width:500px;width:100%;margin:0 auto;">
 
     <div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
-      <div style="font-size:12px;font-weight:700;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:10px;">PREGUNTA 1</div>
-      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:10px;line-height:1.4;">¿Que es lo que mas valoras de tu vida hoy?</div>
-      <textarea id="c1" placeholder="Escribí libremente..." rows="4"
+      <div style="font-size:12px;font-weight:700;color:#F59E0B;letter-spacing:1.5px;margin-bottom:10px;">LOGROS</div>
+      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:6px;line-height:1.4;">Contale a ese niño lo que has logrado 🌟</div>
+      <div style="color:#9CA3AF;font-size:12px;margin-bottom:10px;">¿En qué te convertiste? ¿Qué construiste? ¿De qué estás orgulloso/a?</div>
+      <textarea id="c1" placeholder="Querido niño, quiero contarte que..." rows="5"
         style="width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.6;"></textarea>
     </div>
 
     <div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
-      <div style="font-size:12px;font-weight:700;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:10px;">PREGUNTA 2</div>
-      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:10px;line-height:1.4;">¿Cual es el logro mas importante que queres celebrar el proximo Día del Niño?</div>
-      <textarea id="c2" placeholder="Escribí libremente..." rows="4"
+      <div style="font-size:12px;font-weight:700;color:#0A7C64;letter-spacing:1.5px;margin-bottom:10px;">PLAN 1</div>
+      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:6px;line-height:1.4;">¿Cuál es tu primer plan para este año? 🎯</div>
+      <textarea id="c2" placeholder="Mi primer plan es..." rows="3"
+        style="width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.6;"></textarea>
+    </div>
+
+    <div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="font-size:12px;font-weight:700;color:#0A7C64;letter-spacing:1.5px;margin-bottom:10px;">PLAN 2</div>
+      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:6px;line-height:1.4;">¿Y el segundo? 🎯</div>
+      <textarea id="c3" placeholder="Mi segundo plan es..." rows="3"
         style="width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.6;"></textarea>
     </div>
 
     <div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
-      <div style="font-size:12px;font-weight:700;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:10px;">PREGUNTA 3</div>
-      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:10px;line-height:1.4;">¿Que le dirias a tu yo de hace 10 años?</div>
-      <textarea id="c3" placeholder="Escribí libremente..." rows="4"
+      <div style="font-size:12px;font-weight:700;color:#0A7C64;letter-spacing:1.5px;margin-bottom:10px;">PLAN 3</div>
+      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:6px;line-height:1.4;">¿Y el tercero? 🎯</div>
+      <textarea id="c4" placeholder="Mi tercer plan es..." rows="3"
         style="width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.6;"></textarea>
     </div>
 
@@ -631,7 +655,7 @@ async function delEntry(i){
     <div style="font-size:44px;margin-bottom:12px;">📅</div>
     <h2 style="font-size:20px;font-weight:800;color:#065F4C;margin-bottom:8px;">Listo para guardar</h2>
     <p style="color:#6B7280;font-size:14px;line-height:1.7;margin-bottom:18px;">
-      Tu carta esta lista. Elegí donde guardar el recordatorio — llega el <strong>Día del Niño 2027</strong> con tu carta adentro.
+      Tu carta está lista. Elegí donde guardar el recordatorio — llega el <strong>Día del Niño 2027</strong> con tu carta adentro.
     </p>
     <button class="bt bt-tl" onclick="abrirCal('google')" style="margin-bottom:8px;background:#0A7C64;">
       📆 Google Calendar
@@ -667,6 +691,70 @@ async function delEntry(i){
     </div>
   </div>
 </div>
+
+
+<script>
+let cartaTexto='';
+
+function generarCarta(){
+  const logros=document.getElementById('c1').value.trim();
+  const p1=document.getElementById('c2').value.trim();
+  const p2=document.getElementById('c3').value.trim();
+  const p3=document.getElementById('c4').value.trim();
+  if(!logros&&!p1&&!p2&&!p3){document.getElementById('carta-err').style.display='block';return;}
+  document.getElementById('carta-err').style.display='none';
+  const nombre=(st.sel?.name||'').split(' ')[0]||'amigo/a';
+  // Guardar planes para el recordatorio
+  window._planes=[p1,p2,p3].filter(Boolean);
+  // Construir carta
+  let carta='Querido nino interior,\n\n';
+  if(logros) carta+='Soy '+nombre+' y quiero contarte lo que hemos logrado:\n'+logros+'\n\n';
+  const planes=window._planes;
+  if(planes.length){
+    carta+='Tambien quiero prometerte mis proximos planes:\n';
+    planes.forEach((p,i)=>carta+=(i+1)+'. '+p+'\n');
+    carta+='\n';
+  }
+  carta+='Con carino,\n'+nombre+' — Dia del Nino 2026\n— Irioma Promocionales';
+  cartaTexto=carta;
+  go('cal');
+}
+
+function abrirCal(tipo){
+  const planes=window._planes||[];
+  let extra='';
+  if(planes.length){
+    extra='\n\n---\nHace un ano te prometiste estos 3 planes. Ya es momento de reflexionar:\n\n';
+    planes.forEach(function(p,i){extra+='📌 Plan '+(i+1)+': '+p+'\n';});
+    extra+='\n¿Cual cumpliste? ¿Cual esta en proceso? ¿Cual cambio?\n';
+  }
+  const contenido=cartaTexto+extra+'\n\n— Irioma Promocionales | autopyme.cr';
+  const titulo=encodeURIComponent('Mi carta al nino interior - Día del Niño 2026');
+  const detalle=encodeURIComponent(contenido);
+  const lugar=encodeURIComponent('Irioma Promocionales, Costa Rica');
+  if(tipo==='google'){
+    window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text='+titulo+'&dates=20270801/20270802&details='+detalle+'&location='+lugar,'_blank');
+  } else {
+    const desc=contenido.replace(/
+/g,'\\n');
+    const ics='BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+UID:'+Date.now()+'@irioma.cr
+DTSTART;VALUE=DATE:20270801
+DTEND;VALUE=DATE:20270802
+SUMMARY:Mi carta al nino interior - Dia del Nino 2026
+DESCRIPTION:'+desc+'
+END:VEVENT
+END:VCALENDAR';
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));
+    a.download='carta-nino-2027.ics';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+  }
+  setTimeout(function(){go('fin');},800);
+}
+</script>
 
 </body>
 </html>
