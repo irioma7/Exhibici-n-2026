@@ -301,17 +301,18 @@ function parse(fn){
 }
 
 // ── Logo taps (admin access) ────────────────────────────
-// Admin access: 5 clics en el logo con reset de 2 segundos
+// Admin: entrar via ?admin en la URL o 5 clics en el logo
+if(window.location.search.includes('admin')){
+  window.history.replaceState({},'',window.location.pathname);
+  go('al');
+}
 let tapTimer=null;
-document.getElementById('logo').addEventListener('click',()=>{
+document.getElementById('logo').addEventListener('mousedown',()=>{
   st.taps++;
   if(tapTimer)clearTimeout(tapTimer);
-  tapTimer=setTimeout(()=>{st.taps=0;},2000);
+  tapTimer=setTimeout(()=>{st.taps=0;},2500);
   if(st.taps>=5){st.taps=0;clearTimeout(tapTimer);go('al');}
 });
-// Prevenir selección de texto en clics rápidos
-document.getElementById('logo').style.userSelect='none';
-document.getElementById('logo').style.webkitUserSelect='none';
 document.getElementById('ni').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
 document.getElementById('ac').addEventListener('keydown',e=>{if(e.key==='Enter')aLogin();});
 
