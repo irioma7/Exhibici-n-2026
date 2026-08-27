@@ -65,7 +65,7 @@ const IDX_KEY       = 'irioma-nino-INDEX';
     <div id="ni-err" style="display:none;color:#EF4444;font-size:12px;margin-top:4px;">Ingresá tu nombre primero</div>
     <button class="bt bt-tl" onclick="doSearch()" style="margin-top:12px;">Buscar mi foto →</button>
     <div style="text-align:center;margin-top:20px;">
-      <a href="#admin" style="color:#D1D5DB;font-size:10px;text-decoration:none;user-select:none;">·</a>
+      <button onclick="go('al')" style="background:none;border:none;color:#D1D5DB;font-size:11px;cursor:pointer;padding:4px 8px;">·</button>
     </div>
   </div>
 </div>
@@ -313,15 +313,6 @@ function parse(fn){
 
 // ── Logo taps (admin access) ────────────────────────────
 // Admin: entrar via ?admin en la URL o 5 clics en el logo
-// Admin: via link #admin o hashchange
-function checkAdminHash(){
-  if(window.location.hash.includes('admin')){
-    window.history.replaceState({},'',window.location.pathname);
-    go('al');
-  }
-}
-checkAdminHash();
-window.addEventListener('hashchange',checkAdminHash);
 let tapTimer=null;
 document.getElementById('logo').addEventListener('mousedown',()=>{
   st.taps++;
