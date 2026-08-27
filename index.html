@@ -302,7 +302,7 @@ function parse(fn){
 
 // ── Logo taps (admin access) ────────────────────────────
 // Admin: entrar via ?admin en la URL o 5 clics en el logo
-if(window.location.search.includes('admin')){
+if(window.location.hash==='#admin'){
   window.history.replaceState({},'',window.location.pathname);
   go('al');
 }
