@@ -41,10 +41,8 @@ video{display:block;}
   CONFIGURACIÓN — Completar antes de subir
 ────────────────────────────────────────── -->
 <script>
-const SUPABASE_URL  = 'window.__ENV_URL__;
-';      // ej: https://abcxyz.supabase.co
-const SUPABASE_KEY  = 'window.__ENV_KEY__;
-'; // empieza con eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+const SUPABASE_URL  = 'PEGAR_URL_AQUI';      // ej: https://abcxyz.supabase.co
+const SUPABASE_KEY  = 'PEGAR_ANON_KEY_AQUI'; // empieza con eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 const ADMIN_CODE    = 'IRIOMA2026';
 const PREFIX        = 'irioma-nino-';
 const IDX_KEY       = 'irioma-nino-INDEX';
@@ -53,18 +51,18 @@ const IDX_KEY       = 'irioma-nino-INDEX';
 <!-- LANDING -->
 <div id="s-land" class="sc on" style="background:#065F4C;min-height:100vh;">
   <div style="text-align:center;margin-bottom:20px;animation:pop .5s ease;">
-    <div id="logo" style="background:rgba(255,255,255,0.14);border-radius:12px;padding:9px 22px;display:inline-block;cursor:default;">
+    <div id="logo" style="background:rgba(255,255,255,0.14);border-radius:12px;padding:9px 22px;display:inline-block;cursor:default;user-select:none;-webkit-user-select:none;">
       <div style="color:#fff;font-size:26px;font-weight:800;letter-spacing:3px;">IRIOMA</div>
       <div style="color:rgba(255,255,255,0.6);font-size:11px;letter-spacing:2px;">PROMOCIONALES</div>
     </div>
   </div>
-  <div style="background:#F59E0B;border-radius:100px;padding:5px 20px;margin-bottom:18px;"><span style="color:#78350F;font-weight:700;font-size:13px;">Exhibicion · Dia del Nino 2026</span></div>
+  <div style="background:#F59E0B;border-radius:100px;padding:5px 20px;margin-bottom:18px;"><span style="color:#78350F;font-weight:700;font-size:13px;">Exhibición · Día del Niño 2026</span></div>
   <div class="crd" style="text-align:center;">
     <div style="font-size:44px;margin-bottom:12px;">📸</div>
-    <h1 style="font-size:22px;font-weight:800;color:#065F4C;margin-bottom:8px;">Encontra tu foto</h1>
+    <h1 style="font-size:22px;font-weight:800;color:#065F4C;margin-bottom:8px;">Encontrá tu foto</h1>
     <p style="color:#6B7280;font-size:14px;line-height:1.7;margin-bottom:16px;">Busca tu nombre, confirma la foto y tomate una selfie. Tu tarjeta para Instagram te espera.</p>
     <input type="text" id="ni" placeholder="Tu nombre (ej: Alina)" autocomplete="off"/>
-    <div id="ni-err" style="display:none;color:#EF4444;font-size:12px;margin-top:4px;">Ingresa tu nombre primero</div>
+    <div id="ni-err" style="display:none;color:#EF4444;font-size:12px;margin-top:4px;">Ingresá tu nombre primero</div>
     <button class="bt bt-tl" onclick="doSearch()" style="margin-top:12px;">Buscar mi foto →</button>
   </div>
 </div>
@@ -80,7 +78,7 @@ const IDX_KEY       = 'irioma-nino-INDEX';
   <div class="crd" style="text-align:center;">
     <div style="font-size:44px;margin-bottom:12px;">🤔</div>
     <h2 style="font-size:20px;font-weight:800;color:#065F4C;margin-bottom:8px;">No encontramos tu foto</h2>
-    <p style="color:#6B7280;font-size:14px;line-height:1.6;margin-bottom:16px;">Verifica como escribiste tu nombre o consulta con el equipo de Irioma.</p>
+    <p style="color:#6B7280;font-size:14px;line-height:1.6;margin-bottom:16px;">Verificá como escribiste tu nombre o consulta con el equipo de Irioma.</p>
     <button class="bt bt-tl" onclick="go('land')">← Intentar de nuevo</button>
   </div>
 </div>
@@ -133,7 +131,7 @@ const IDX_KEY       = 'irioma-nino-INDEX';
     <h2 style="font-size:20px;font-weight:800;color:#065F4C;margin-bottom:8px;">Ahora tu foto de hoy</h2>
     <p style="color:#6B7280;font-size:14px;line-height:1.7;margin-bottom:14px;">Combinamos tu foto de nino con tu selfie de hoy para crear tu tarjeta de Instagram.</p>
     <div style="background:#E6F4F1;border-radius:10px;padding:12px 14px;margin-bottom:16px;text-align:left;"><div style="color:#065F4C;font-size:13px;">La tarjeta es formato Stories (9:16) — perfecta para Instagram.</div></div>
-    <button class="bt bt-tl" onclick="startCam()">Abrir camara</button>
+    <button class="bt bt-tl" onclick="startCam()">Abrir cámara</button>
     <button class="bt bt-out" onclick="document.getElementById('gal').click()">Elegir de la galeria</button>
     <input type="file" id="gal" accept="image/*" capture="user" style="display:none;" onchange="fromGallery(event)"/>
   </div>
@@ -148,7 +146,7 @@ const IDX_KEY       = 'irioma-nino-INDEX';
     </div>
     <div id="cam-err" style="display:none;background:rgba(255,255,255,0.07);border-radius:16px;padding:32px;text-align:center;">
       <div style="font-size:44px;margin-bottom:10px;">📵</div>
-      <div style="color:#fff;margin-bottom:14px;">Camara no disponible en este navegador</div>
+      <div style="color:#fff;margin-bottom:14px;">Cámara no disponible en este navegador</div>
       <button class="bt bt-am" onclick="document.getElementById('gal2').click()">Elegir foto de la galeria</button>
       <input type="file" id="gal2" accept="image/*" style="display:none;" onchange="fromGallery(event)"/>
     </div>
@@ -157,7 +155,7 @@ const IDX_KEY       = 'irioma-nino-INDEX';
         <video id="vid" playsinline muted autoplay style="width:100%;height:100%;object-fit:cover;transform:scaleX(-1);"></video>
         <div id="cam-ld" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;background:#111;">
           <div style="font-size:28px;animation:bob 1s ease-in-out infinite;">📷</div>
-          <div style="margin-top:8px;font-size:13px;">Iniciando camara...</div>
+          <div style="margin-top:8px;font-size:13px;">Iniciando cámara...</div>
         </div>
         <div id="face-g" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:160px;height:200px;border:2px dashed rgba(255,255,255,0.35);border-radius:50%;pointer-events:none;"></div>
       </div>
@@ -231,8 +229,8 @@ const IDX_KEY       = 'irioma-nino-INDEX';
   <div style="padding:16px;max-width:500px;width:100%;margin:0 auto;">
     <div style="background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
       <div style="font-weight:700;color:#111;margin-bottom:10px;font-size:14px;">Cargar fotos</div>
-      <button class="bt bt-tl" onclick="document.getElementById('af').click()" style="font-size:13px;margin-top:0;">📁 Seleccionar fotos de la carpeta</button>
-      <p style="color:#9CA3AF;font-size:11px;margin-top:8px;margin-bottom:10px;line-height:1.6;">Podes seleccionar todas las fotos a la vez. El nombre del archivo define el registro (ej: <strong>Alina Irioma.jpg</strong> → Nombre: Alina, Empresa: Irioma).</p>
+      <button class="bt bt-tl" onclick="document.getElementById('af').click()" style="font-size:13px;margin-top:0;">📁 Seleccionár fotos de la carpeta</button>
+      <p style="color:#9CA3AF;font-size:11px;margin-top:8px;margin-bottom:10px;line-height:1.6;">Podés seleccionar todas las fotos a la vez. El nombre del archivo define el registro (ej: <strong>Alina Irioma.jpg</strong> → Nombre: Alina, Empresa: Irioma).</p>
       <input type="file" id="af" accept="image/*" multiple style="display:none;" onchange="onFiles(event)"/>
       <div id="q-wrap" style="display:none;">
         <div id="q-cnt" style="font-weight:700;color:#374151;font-size:13px;margin-bottom:8px;"></div>
@@ -252,9 +250,9 @@ const IDX_KEY       = 'irioma-nino-INDEX';
     <div style="background:#FFFBEB;border-radius:10px;padding:14px 16px;margin-top:12px;border-left:3px solid #F59E0B;">
       <div style="font-weight:700;color:#92400E;font-size:13px;margin-bottom:6px;">📋 Instrucciones</div>
       <ol style="color:#78350F;font-size:12px;padding-left:16px;line-height:2.1;">
-        <li>Selecciona todas las fotos a la vez</li>
-        <li>Verifica nombre y empresa — edita si algo quedo mal</li>
-        <li>Toca "Subir fotos"</li>
+        <li>Seleccioná todas las fotos a la vez</li>
+        <li>Verificá nombre y empresa — edita si algo quedo mal</li>
+        <li>Tocá "Subir fotos"</li>
         <li>El cliente busca solo por su nombre de pila</li>
       </ol>
     </div>
@@ -303,7 +301,17 @@ function parse(fn){
 }
 
 // ── Logo taps (admin access) ────────────────────────────
-document.getElementById('logo').addEventListener('click',()=>{st.taps++;if(st.taps>=5){st.taps=0;go('al');}});
+// Admin access: 5 clics en el logo con reset de 2 segundos
+let tapTimer=null;
+document.getElementById('logo').addEventListener('click',()=>{
+  st.taps++;
+  if(tapTimer)clearTimeout(tapTimer);
+  tapTimer=setTimeout(()=>{st.taps=0;},2000);
+  if(st.taps>=5){st.taps=0;clearTimeout(tapTimer);go('al');}
+});
+// Prevenir selección de texto en clics rápidos
+document.getElementById('logo').style.userSelect='none';
+document.getElementById('logo').style.webkitUserSelect='none';
 document.getElementById('ni').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
 document.getElementById('ac').addEventListener('keydown',e=>{if(e.key==='Enter')aLogin();});
 
@@ -431,7 +439,7 @@ async function makeCard(){
     ctx.strokeStyle='#F59E0B';ctx.lineWidth=4;ctx.globalAlpha=.7;ctx.beginPath();ctx.moveTo(80,H*.476);ctx.lineTo(W-80,H*.476);ctx.stroke();ctx.globalAlpha=1;
     ctx.font='bold 68px Arial';ctx.fillStyle='rgba(255,255,255,.9)';ctx.textAlign='left';ctx.fillText('ENTONCES',72,H*.42);
     ctx.textAlign='center';ctx.fillStyle='#F59E0B';ctx.font='bold 60px Arial';ctx.fillText('MI NINO INTERIOR',W/2,H*.492);
-    ctx.fillStyle='rgba(255,255,255,.6)';ctx.font='34px Arial';ctx.fillText('DIA DEL NINO · IRIOMA 2026',W/2,H*.527);
+    ctx.fillStyle='rgba(255,255,255,.6)';ctx.font='34px Arial';ctx.fillText('DÍA DEL NIÑO · IRIOMA 2026',W/2,H*.527);
     ctx.textAlign='right';ctx.fillStyle='rgba(255,255,255,.9)';ctx.font='bold 68px Arial';ctx.fillText('HOY · 2026',W-72,H*.936);
     ctx.textAlign='center';ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='26px Arial';ctx.fillText('iriomapromocionales.com  ·  autopyme.cr',W/2,H*.974);
     st.card=cv.toDataURL('image/jpeg',.93);
@@ -569,10 +577,10 @@ async function delEntry(i){
     <div style="font-size:44px;margin-bottom:12px;">✉️</div>
     <h2 style="font-size:21px;font-weight:800;color:#065F4C;margin-bottom:8px;">Una carta para tu yo del futuro</h2>
     <p style="color:#6B7280;font-size:14px;line-height:1.7;margin-bottom:16px;">
-      Tenes un minuto para escribirte una carta que vas a leer el proximo Dia del Nino. Solo vos la vas a ver — la guardaremos en tu calendario.
+      Tenés un minuto para escribirte una carta que vas a leer el proximo Día del Niño. Solo vos la vas a ver — la guardaremos en tu calendario.
     </p>
     <div style="background:#E6F4F1;border-radius:11px;padding:12px 14px;margin-bottom:18px;text-align:left;">
-      <div style="color:#065F4C;font-size:13px;line-height:1.6;">El recordatorio llega exactamente un ano despues, el <strong>Dia del Nino 2027</strong>, con tu carta adentro.</div>
+      <div style="color:#065F4C;font-size:13px;line-height:1.6;">El recordatorio llega exactamente un año después, el <strong>Día del Niño 2027</strong>, con tu carta adentro.</div>
     </div>
     <button class="bt bt-tl" onclick="go('carta')">Escribir mi carta →</button>
     <button class="bt bt-out" onclick="go('fin')">Omitir por ahora</button>
@@ -583,32 +591,32 @@ async function delEntry(i){
 <div id="s-carta" class="sc" style="background:#F7F9F7;align-items:stretch;justify-content:flex-start;padding:0;">
   <div style="background:#065F4C;padding:14px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;">
     <button class="bt bt-gh" onclick="go('ci')" style="width:38px;height:38px;border-radius:9px;padding:0;font-size:17px;flex-shrink:0;">←</button>
-    <div style="color:#fff;font-weight:700;font-size:15px;">Tu carta · Dia del Nino 2026</div>
+    <div style="color:#fff;font-weight:700;font-size:15px;">Tu carta · Día del Niño 2026</div>
   </div>
   <div style="padding:16px;max-width:500px;width:100%;margin:0 auto;">
 
     <div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
       <div style="font-size:12px;font-weight:700;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:10px;">PREGUNTA 1</div>
       <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:10px;line-height:1.4;">¿Que es lo que mas valoras de tu vida hoy?</div>
-      <textarea id="c1" placeholder="Escribe libremente..." rows="4"
+      <textarea id="c1" placeholder="Escribí libremente..." rows="4"
         style="width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.6;"></textarea>
     </div>
 
     <div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
       <div style="font-size:12px;font-weight:700;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:10px;">PREGUNTA 2</div>
-      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:10px;line-height:1.4;">¿Cual es el logro mas importante que queres celebrar el proximo Dia del Nino?</div>
-      <textarea id="c2" placeholder="Escribe libremente..." rows="4"
+      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:10px;line-height:1.4;">¿Cual es el logro mas importante que queres celebrar el proximo Día del Niño?</div>
+      <textarea id="c2" placeholder="Escribí libremente..." rows="4"
         style="width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.6;"></textarea>
     </div>
 
     <div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
       <div style="font-size:12px;font-weight:700;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:10px;">PREGUNTA 3</div>
-      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:10px;line-height:1.4;">¿Que le dirias a tu yo de hace 10 anos?</div>
-      <textarea id="c3" placeholder="Escribe libremente..." rows="4"
+      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:10px;line-height:1.4;">¿Que le dirias a tu yo de hace 10 años?</div>
+      <textarea id="c3" placeholder="Escribí libremente..." rows="4"
         style="width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.6;"></textarea>
     </div>
 
-    <div id="carta-err" style="display:none;color:#EF4444;font-size:13px;margin-bottom:10px;text-align:center;">Escribe al menos una respuesta para continuar</div>
+    <div id="carta-err" style="display:none;color:#EF4444;font-size:13px;margin-bottom:10px;text-align:center;">Escribí al menos una respuesta para continuar</div>
 
     <button class="bt bt-tl" onclick="generarCarta()" style="font-size:15px;">Guardar en mi calendario →</button>
     <button class="bt bt-out" onclick="go('fin')">Saltar</button>
@@ -622,7 +630,7 @@ async function delEntry(i){
     <div style="font-size:44px;margin-bottom:12px;">📅</div>
     <h2 style="font-size:20px;font-weight:800;color:#065F4C;margin-bottom:8px;">Listo para guardar</h2>
     <p style="color:#6B7280;font-size:14px;line-height:1.7;margin-bottom:18px;">
-      Tu carta esta lista. Elegí donde guardar el recordatorio — llega el <strong>Dia del Nino 2027</strong> con tu carta adentro.
+      Tu carta esta lista. Elegí donde guardar el recordatorio — llega el <strong>Día del Niño 2027</strong> con tu carta adentro.
     </p>
     <button class="bt bt-tl" onclick="abrirCal('google')" style="margin-bottom:8px;background:#0A7C64;">
       📆 Google Calendar
@@ -631,7 +639,7 @@ async function delEntry(i){
       🍎 Apple / Outlook (.ics)
     </button>
     <div style="background:#E6F4F1;border-radius:10px;padding:12px;margin:8px 0 16px;font-size:13px;color:#065F4C;line-height:1.5;">
-      Toca el boton, se abre tu calendario con todo pre-llenado — solo confirmas "Agregar evento".
+      Tocá el boton, se abre tu calendario con todo pre-llenado — solo confirmas "Agregar evento".
     </div>
     <button class="bt bt-out" onclick="go('fin')">Continuar sin guardar</button>
   </div>
@@ -642,7 +650,7 @@ async function delEntry(i){
   <div style="text-align:center;width:100%;max-width:380px;padding:0 20px;animation:su .5s ease;">
     <div style="font-size:72px;margin-bottom:8px;">🎉</div>
     <div style="font-size:28px;margin-bottom:4px;">🧒</div>
-    <h1 style="color:#F59E0B;font-size:22px;font-weight:800;margin:16px 0 8px;letter-spacing:1px;">Feliz Dia del Nino</h1>
+    <h1 style="color:#F59E0B;font-size:22px;font-weight:800;margin:16px 0 8px;letter-spacing:1px;">Feliz Día del Niño</h1>
     <p style="color:rgba(255,255,255,0.65);font-size:14px;line-height:1.8;margin-bottom:24px;">
       Gracias por ser parte de esta experiencia. Que este dia te recuerde quien fuiste y te inspire quien vas a ser.
     </p>
