@@ -41,8 +41,8 @@ video{display:block;}
   CONFIGURACIÓN — Completar antes de subir
 ────────────────────────────────────────── -->
 <script>
-const SUPABASE_URL  = 'PEGAR_URL_AQUI';      // ej: https://abcxyz.supabase.co
-const SUPABASE_KEY  = 'PEGAR_ANON_KEY_AQUI'; // empieza con eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+const SUPABASE_URL  = 'https://lzvnhhtotvquzwdjnvwm.supabase.co';      // ej: https://abcxyz.supabase.co
+const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6dm5oaHRvdHZxdXp3ZGpudndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NDI5MzUsImV4cCI6MjEwMzQxODkzNX0.lV8nLnP_EwHsBZjIlfTXmmekJgXtTYI1j14VxF0Jq08'; // empieza con eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 const ADMIN_CODE    = 'IRIOMA2026';
 const PREFIX        = 'irioma-nino-';
 const IDX_KEY       = 'irioma-nino-INDEX';
@@ -65,7 +65,7 @@ const IDX_KEY       = 'irioma-nino-INDEX';
     <div id="ni-err" style="display:none;color:#EF4444;font-size:12px;margin-top:4px;">Ingresá tu nombre primero</div>
     <button class="bt bt-tl" onclick="doSearch()" style="margin-top:12px;">Buscar mi foto →</button>
     <div style="text-align:center;margin-top:20px;">
-      <span id="adm-dot" style="color:#D1D5DB;font-size:11px;cursor:default;user-select:none;">·</span>
+      <a href="#admin" style="color:#D1D5DB;font-size:10px;text-decoration:none;user-select:none;">·</a>
     </div>
   </div>
 </div>
@@ -266,18 +266,26 @@ const IDX_KEY       = 'irioma-nino-INDEX';
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 // ── Supabase init ───────────────────────────────────────
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let sb;
+try {
+  sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+} catch(e) {
+  console.warn('Supabase init error:', e);
+}
 const TBL = 'irioma_storage';
 
 async function sGet(key){
+  if(!sb){console.warn('Supabase no inicializado');return null;}
   try{const{data}=await sb.from(TBL).select('value').eq('key',key).maybeSingle();return data?{value:data.value}:null;}
   catch(e){console.error('sGet',e);return null;}
 }
 async function sSet(key,value){
+  if(!sb){console.warn('Supabase no inicializado');return;}
   try{await sb.from(TBL).upsert({key,value},{onConflict:'key'});}
   catch(e){console.error('sSet',e);}
 }
 async function sList(prefix){
+  if(!sb){return{keys:[]};}
   try{const{data}=await sb.from(TBL).select('key').like('key',prefix+'%');return{keys:(data||[]).map(d=>d.key)};}
   catch(e){console.error('sList',e);return{keys:[]};}
 }
@@ -305,23 +313,15 @@ function parse(fn){
 
 // ── Logo taps (admin access) ────────────────────────────
 // Admin: entrar via ?admin en la URL o 5 clics en el logo
-setTimeout(()=>{
+// Admin: via link #admin o hashchange
+function checkAdminHash(){
   if(window.location.hash.includes('admin')){
     window.history.replaceState({},'',window.location.pathname);
     go('al');
   }
-},150);
-// Punto secreto admin
-let dotTaps=0,dotTimer=null;
-document.addEventListener('DOMContentLoaded',()=>{
-  const dot=document.getElementById('adm-dot');
-  if(dot) dot.addEventListener('click',()=>{
-    dotTaps++;
-    if(dotTimer)clearTimeout(dotTimer);
-    dotTimer=setTimeout(()=>dotTaps=0,2000);
-    if(dotTaps>=3){dotTaps=0;go('al');}
-  });
-});
+}
+checkAdminHash();
+window.addEventListener('hashchange',checkAdminHash);
 let tapTimer=null;
 document.getElementById('logo').addEventListener('mousedown',()=>{
   st.taps++;
