@@ -104,7 +104,7 @@ const IDX_KEY       = 'irioma-nino-INDEX';
 <!-- CONFIRMING -->
 <div id="s-conf" class="sc" style="background:#065F4C;">
   <div class="crd" style="text-align:center;">
-    <div style="font-size:11px;font-weight:700;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:10px;">ESTA ES TU FOTO?</div>
+    <div style="font-size:11px;font-weight:700;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:10px;">¿ESTA FOTO ES TUYA?</div>
     <div id="conf-load" style="padding:40px 0;"><div style="font-size:36px;animation:bob 1s ease-in-out infinite;margin-bottom:8px;">⏳</div><div style="color:#065F4C;font-weight:600;">Cargando tu foto...</div></div>
     <div id="conf-cont" style="display:none;">
       <img id="conf-img" style="width:75%;max-width:230px;aspect-ratio:1;object-fit:cover;border-radius:14px;border:3px solid #F59E0B;margin-bottom:10px;"/>
@@ -114,7 +114,7 @@ const IDX_KEY       = 'irioma-nino-INDEX';
       <span style="font-size:15px;">🔊</span>
       <div style="color:#92400E;font-size:12px;line-height:1.5;">Subí el volumen antes de continuar — vas a escuchar una canción especial.</div>
     </div>
-    <button class="bt bt-tl" onclick="confirmPhoto()">Si, esa soy yo!</button>
+    <button class="bt bt-tl" onclick="confirmPhoto()">¡Sí, esta es la mía! 🙌</button>
       <button class="bt bt-out" onclick="go('res')">No es la mia</button>
     </div>
   </div>
@@ -688,10 +688,10 @@ async function makeCard(){
     const[bg,ch,se]=await Promise.all([load(BG_CARD),load(st.child),load(st.selfie)]);
     // Dibujar fondo
     ctx.drawImage(bg,0,0,W,H);
-    // Foto infancia → cuadro arriba derecha (centro 757,612 | 542x542 | -9deg)
-    dCoverAt(ctx,ch,757,612,542,542,-9);
-    // Selfie → cuadro abajo izquierda (centro 327,1291 | 542x542 | -9deg)
-    dCoverAt(ctx,se,327,1291,542,542,-9);
+    // Foto infancia → cuadro arriba derecha
+    dCoverAt(ctx,ch,757,612,535,535,-11.7);
+    // Selfie → cuadro abajo izquierda
+    dCoverAt(ctx,se,328,1292,545,545,10);
     st.card=cv.toDataURL('image/jpeg',0.93);
     document.getElementById('card-img').src=st.card;
     document.getElementById('dl-msg').style.display='none';
