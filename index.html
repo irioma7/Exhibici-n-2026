@@ -268,6 +268,97 @@ const IDX_KEY       = 'irioma-nino-INDEX';
   </div>
 </div>
 
+
+<!-- CARTA INTRO -->
+<div id="s-ci" class="sc" style="background:#065F4C;">
+  <div class="crd" style="text-align:center;">
+    <div style="font-size:44px;margin-bottom:12px;">✉️</div>
+    <h2 style="font-size:21px;font-weight:800;color:#065F4C;margin-bottom:8px;">Una carta a tu niño interior</h2>
+    <p style="color:#6B7280;font-size:14px;line-height:1.7;margin-bottom:16px;">
+      Contale a ese niño en la foto todo lo que has logrado. Y prometele tus próximos 3 planes.
+    </p>
+    <div style="background:#E6F4F1;border-radius:11px;padding:12px 14px;margin-bottom:18px;text-align:left;">
+      <div style="color:#065F4C;font-size:13px;line-height:1.6;">En el <strong>Día del Niño 2027</strong> recibirás un recordatorio con tu carta — y te preguntará si cumpliste tus 3 planes. 🎯</div>
+    </div>
+    <button class="bt bt-tl" onclick="go('carta')">Escribir mi carta →</button>
+    <button class="bt bt-out" onclick="go('fin')">Omitir por ahora</button>
+  </div>
+</div>
+
+<!-- CARTA EDITOR -->
+<div id="s-carta" class="sc" style="background:#F7F9F7;align-items:stretch;justify-content:flex-start;padding:0;">
+  <div style="background:#065F4C;padding:14px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;">
+    <button class="bt bt-gh" onclick="go('ci')" style="width:38px;height:38px;border-radius:9px;padding:0;font-size:17px;flex-shrink:0;">←</button>
+    <div style="color:#fff;font-weight:700;font-size:15px;">Tu carta · Día del Niño 2026</div>
+  </div>
+  <div style="padding:16px;max-width:500px;width:100%;margin:0 auto;">
+    <div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="font-size:12px;font-weight:700;color:#F59E0B;letter-spacing:1.5px;margin-bottom:10px;">LOGROS</div>
+      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:6px;line-height:1.4;">Contale a ese niño lo que has logrado 🌟</div>
+      <div style="color:#9CA3AF;font-size:12px;margin-bottom:10px;">¿En qué te convertiste? ¿Qué construiste? ¿De qué estás orgulloso/a?</div>
+      <textarea id="c1" placeholder="Querido niño, quiero contarte que..." rows="4" style="width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.6;"></textarea>
+    </div>
+    <div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="font-size:12px;font-weight:700;color:#0A7C64;letter-spacing:1.5px;margin-bottom:10px;">PLAN 1</div>
+      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:6px;">¿Cuál es tu primer plan para este año? 🎯</div>
+      <textarea id="c2" placeholder="Mi primer plan es..." rows="3" style="width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.6;"></textarea>
+    </div>
+    <div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="font-size:12px;font-weight:700;color:#0A7C64;letter-spacing:1.5px;margin-bottom:10px;">PLAN 2</div>
+      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:6px;">¿Y el segundo? 🎯</div>
+      <textarea id="c3" placeholder="Mi segundo plan es..." rows="3" style="width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.6;"></textarea>
+    </div>
+    <div style="background:#fff;border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="font-size:12px;font-weight:700;color:#0A7C64;letter-spacing:1.5px;margin-bottom:10px;">PLAN 3</div>
+      <div style="font-weight:700;color:#065F4C;font-size:15px;margin-bottom:6px;">¿Y el tercero? 🎯</div>
+      <textarea id="c4" placeholder="Mi tercer plan es..." rows="3" style="width:100%;padding:12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;font-family:inherit;resize:none;outline:none;line-height:1.6;"></textarea>
+    </div>
+    <div id="carta-err" style="display:none;color:#EF4444;font-size:13px;margin-bottom:10px;text-align:center;">Escribí al menos una respuesta para continuar</div>
+    <button class="bt bt-tl" onclick="generarCarta()" style="font-size:15px;">Guardar en mi calendario →</button>
+    <button class="bt bt-out" onclick="go('fin')">Saltar</button>
+    <p style="color:#9CA3AF;font-size:11px;text-align:center;margin-top:10px;line-height:1.6;">Solo vos vas a leer esta carta. Irioma no guarda el contenido.</p>
+  </div>
+</div>
+
+<!-- CALENDARIO -->
+<div id="s-cal" class="sc" style="background:#065F4C;">
+  <div class="crd" style="text-align:center;">
+    <div style="font-size:44px;margin-bottom:12px;">📅</div>
+    <h2 style="font-size:20px;font-weight:800;color:#065F4C;margin-bottom:8px;">Lista para guardar</h2>
+    <p style="color:#6B7280;font-size:14px;line-height:1.7;margin-bottom:18px;">
+      El <strong>Día del Niño 2027</strong> recibirás tu carta y te preguntará si cumpliste tus 3 planes.
+    </p>
+    <button class="bt bt-tl" onclick="abrirCal('google')" style="margin-bottom:8px;">📆 Google Calendar</button>
+    <button class="bt" onclick="abrirCal('ics')" style="background:#1D1D1F;color:#fff;margin-bottom:8px;">🍎 Apple / Outlook (.ics)</button>
+    <div style="background:#E6F4F1;border-radius:10px;padding:12px;margin:8px 0 16px;font-size:13px;color:#065F4C;line-height:1.5;">
+      Se abre tu calendario con todo pre-llenado — solo confirmás "Agregar evento".
+    </div>
+    <button class="bt bt-out" onclick="go('fin')">Continuar sin guardar</button>
+  </div>
+</div>
+
+<!-- FIN -->
+<div id="s-fin" class="sc" style="background:#040E09;min-height:100vh;">
+  <div style="text-align:center;width:100%;max-width:380px;padding:0 20px;animation:su .5s ease;">
+    <div style="font-size:72px;margin-bottom:8px;">🎉</div>
+    <div style="font-size:28px;margin-bottom:4px;">🧒</div>
+    <h1 style="color:#F59E0B;font-size:22px;font-weight:800;margin:16px 0 8px;letter-spacing:1px;">Feliz Día del Niño</h1>
+    <p style="color:rgba(255,255,255,0.65);font-size:14px;line-height:1.8;margin-bottom:24px;">
+      Gracias por ser parte de esta experiencia. Que este día te recuerde quién fuiste y te inspire quién vas a ser.
+    </p>
+    <div style="background:rgba(255,255,255,0.05);border-radius:16px;padding:20px;margin-bottom:16px;">
+      <div style="color:rgba(255,255,255,0.4);font-size:10px;letter-spacing:2px;margin-bottom:6px;">CON CARIÑO</div>
+      <div style="color:#fff;font-size:20px;font-weight:800;letter-spacing:2px;">IRIOMA</div>
+      <div style="color:rgba(255,255,255,0.5);font-size:12px;margin-top:2px;">Promocionales</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:14px;">
+      <div style="color:rgba(255,255,255,0.3);font-size:10px;letter-spacing:1px;margin-bottom:3px;">EXPERIENCIA DIGITAL POR</div>
+      <div style="color:rgba(255,255,255,0.65);font-size:15px;font-weight:700;letter-spacing:1px;">Korre</div>
+      <div style="color:rgba(255,255,255,0.3);font-size:11px;">korre.cr</div>
+    </div>
+  </div>
+</div>
+
 <!-- ADMIN LOGIN -->
 <div id="s-al" class="sc" style="background:#F7F9F7;">
   <div class="crd" style="text-align:center;">
@@ -496,7 +587,7 @@ function confirmPhoto(){
   go('rev');
   if(st.child)document.getElementById('rev-bg').style.backgroundImage='url('+st.child+')';
   playMusic();
-  startReveal();
+  setTimeout(startReveal, 2000);
   if(st.child)document.getElementById('rev-bg').style.backgroundImage=`url(${st.child})`;
   document.getElementById('rev-cd').style.display='block';
   document.getElementById('rev-ph').style.display='none';
@@ -535,9 +626,7 @@ function showCamErr(){document.getElementById('cam-err').style.display='block';d
 
 function stopCam(to){if(st.stream){st.stream.getTracks().forEach(t=>t.stop());st.stream=null;}go(to);}
 
-function stopMusic(){
-  try{if(ytPlayer&&ytPlayer.stopVideo)ytPlayer.stopVideo();}catch(e){}
-}
+
 
 function snap(){
   if(!st.ready)return;
@@ -612,4 +701,241 @@ async function makeCard(){
     go('selfie_preview');
   }
 }
+function dlCard(){
+  const a=document.createElement('a');
+  a.href=st.card;
+  a.download='mi-nino-interior-irioma.jpg';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  document.getElementById('dl-msg').style.display='block';
+  setTimeout(()=>go('ci'),2200);
+}
 
+function resetAll(){
+  st.child=null;st.selfie=null;st.card=null;st.sel=null;st.res=[];
+  st.taps=0;
+  document.getElementById('ni').value='';
+  const img=document.getElementById('rev-img');
+  if(img){img.src='';img.classList.remove('shown');}
+  go('land');
+}
+
+function aLogin(){
+  if(document.getElementById('ac').value===ADMIN_CODE){
+    document.getElementById('ac-err').style.display='none';
+    document.getElementById('ac').value='';
+    loadIdx();go('adm');
+  }else{document.getElementById('ac-err').style.display='block';}
+}
+
+async function loadIdx(){
+  try{const r=await sGet(IDX);st.idx=r?JSON.parse(r.value):[];}catch(e){st.idx=[];}
+  renderIdx();
+  document.getElementById('adm-cnt').textContent=`${st.idx.length} foto${st.idx.length!==1?'s':''}`;
+}
+
+function renderIdx(){
+  const el=document.getElementById('idx-list');
+  if(!st.idx.length){el.innerHTML='<div style="text-align:center;padding:20px;color:#9CA3AF;"><div style="font-size:30px;margin-bottom:6px;">📭</div><div style="font-size:13px;">Aún no hay fotos</div></div>';return;}
+  el.innerHTML=st.idx.map((e,i)=>`
+    <div class="idx-row">
+      <div><div style="font-weight:700;color:#111;font-size:14px;">${e.name}</div><div style="color:#6B7280;font-size:12px;">${e.company}</div></div>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <span style="background:#D1FAE5;color:#065F46;font-size:11px;padding:3px 8px;border-radius:20px;font-weight:700;">✓</span>
+        <button class="del" onclick="delEntry(${i})">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function onFiles(e){
+  st.q=Array.from(e.target.files).map(f=>{const p=parse(f.name);return{file:f,...p,key:PFX+san(p.displayName)};});
+  renderQ();
+}
+
+function renderQ(){
+  if(!st.q.length){document.getElementById('q-wrap').style.display='none';return;}
+  document.getElementById('q-wrap').style.display='block';
+  document.getElementById('q-cnt').textContent=`${st.q.length} foto${st.q.length>1?'s':''} para cargar — verificá los nombres:`;
+  document.getElementById('q-items').innerHTML=st.q.map((it,i)=>`
+    <div class="q-item">
+      <div style="font-size:11px;color:#9CA3AF;margin-bottom:4px;">📄 ${it.file.name}</div>
+      <div class="q-row">
+        <input type="text" value="${it.name}" placeholder="Nombre" onchange="updQ(${i},'name',this.value)"/>
+        <input type="text" value="${it.company}" placeholder="Empresa" onchange="updQ(${i},'company',this.value)"/>
+      </div>
+      <div style="font-size:11px;color:#0A7C64;margin-top:4px;">Clave: ${it.key}</div>
+    </div>`).join('');
+  document.getElementById('up-btn').textContent=`⬆️ Subir ${st.q.length} foto${st.q.length>1?'s':''}`;
+}
+
+function updQ(i,f,v){
+  st.q[i][f]=v;
+  st.q[i].displayName=`${st.q[i].name} ${st.q[i].company}`.trim();
+  st.q[i].key=PFX+san(st.q[i].displayName);
+  const ks=document.querySelectorAll('.q-item');
+  if(ks[i]){const kd=ks[i].querySelector('div[style*="color:#0A7C64"]');if(kd)kd.textContent='Clave: '+st.q[i].key;}
+}
+
+async function uploadAll(){
+  const btn=document.getElementById('up-btn');btn.disabled=true;
+  const pg=document.getElementById('prog'),pf=document.getElementById('prog-f');
+  const st_el=document.getElementById('up-status');
+  pg.style.display='block';st_el.style.display='block';
+  let idx=[];
+  try{const r=await sGet(IDX);if(r)idx=JSON.parse(r.value);}catch(e){}
+  for(let i=0;i<st.q.length;i++){
+    const it=st.q[i];
+    pf.style.width=Math.round(i/st.q.length*100)+'%';
+    st_el.textContent=`Subiendo ${i+1} de ${st.q.length}: ${it.displayName}...`;
+    try{
+      const b64=await new Promise((res,rej)=>{
+        const imgEl=new Image();const url=URL.createObjectURL(it.file);
+        imgEl.onload=()=>{
+          const MAX=1200;let w=imgEl.width,h=imgEl.height;
+          if(w>MAX||h>MAX){const r=Math.min(MAX/w,MAX/h);w=Math.round(w*r);h=Math.round(h*r);}
+          const cv=document.createElement('canvas');cv.width=w;cv.height=h;
+          cv.getContext('2d').drawImage(imgEl,0,0,w,h);
+          URL.revokeObjectURL(url);res(cv.toDataURL('image/jpeg',.82));
+        };imgEl.onerror=rej;imgEl.src=url;
+      });
+      await sSet(it.key,JSON.stringify({photo:b64,name:it.name,company:it.company,displayName:it.displayName}));
+      const xi=idx.findIndex(e=>e.key===it.key);
+      const en={key:it.key,name:it.name,company:it.company,displayName:it.displayName};
+      if(xi>=0)idx[xi]=en;else idx.push(en);
+    }catch(er){console.error('Error subiendo',it.displayName,er);}
+  }
+  await sSet(IDX,JSON.stringify(idx));
+  pf.style.width='100%';
+  st_el.textContent=`✓ ${st.q.length} foto${st.q.length>1?'s':''} guardadas`;
+  st.idx=idx;renderIdx();
+  document.getElementById('adm-cnt').textContent=`${idx.length} foto${idx.length!==1?'s':''}`;
+  st.q=[];document.getElementById('af').value='';
+  setTimeout(()=>{
+    document.getElementById('q-wrap').style.display='none';
+    pg.style.display='none';pf.style.width='0%';
+    st_el.style.display='none';btn.disabled=false;
+    btn.textContent='⬆️ Subir fotos';
+  },2000);
+}
+
+async function delEntry(i){
+  if(!confirm(`¿Eliminar a ${st.idx[i].displayName}?`))return;
+  try{await sSet(st.idx[i].key,'');}catch(e){}
+  st.idx.splice(i,1);
+  await sSet(IDX,JSON.stringify(st.idx));
+  renderIdx();
+  document.getElementById('adm-cnt').textContent=`${st.idx.length} foto${st.idx.length!==1?'s':''}`;
+}
+
+// ── YouTube Music ──────────────────────────────────────
+const YT_VIDEO_ID='KTIs5cki_cA';
+const YT_START=28;
+let ytPlayer=null;
+
+function onYouTubeIframeAPIReady(){
+  ytPlayer=new YT.Player('yt-player-div',{
+    height:'1',width:'1',
+    videoId:YT_VIDEO_ID,
+    playerVars:{autoplay:0,start:YT_START,controls:0,
+      disablekb:1,fs:0,iv_load_policy:3,
+      modestbranding:1,playsinline:1},
+  });
+}
+
+function playMusic(){
+  try{
+    if(ytPlayer&&ytPlayer.seekTo){
+      ytPlayer.seekTo(YT_START,true);
+      ytPlayer.setVolume(75);
+      ytPlayer.playVideo();
+    }
+  }catch(e){}
+}
+
+function stopMusic(){
+  try{if(ytPlayer&&ytPlayer.stopVideo)ytPlayer.stopVideo();}catch(e){}
+}
+
+</script>
+
+<script>
+let cartaTexto='';
+
+function generarCarta(){
+  const logros=document.getElementById('c1').value.trim();
+  const p1=document.getElementById('c2').value.trim();
+  const p2=document.getElementById('c3').value.trim();
+  const p3=document.getElementById('c4').value.trim();
+  if(!logros&&!p1&&!p2&&!p3){document.getElementById('carta-err').style.display='block';return;}
+  document.getElementById('carta-err').style.display='none';
+  const nombre=(st.sel?.name||'').split(' ')[0]||'amigo/a';
+  window._planes=[p1,p2,p3].filter(Boolean);
+  let carta='Querido niño interior,\n\n';
+  if(logros)carta+='Soy '+nombre+' y quiero contarte lo que hemos logrado:\n'+logros+'\n\n';
+  const planes=window._planes;
+  if(planes.length){
+    carta+='También quiero prometerte mis próximos planes:\n';
+    planes.forEach((p,i)=>carta+=(i+1)+'. '+p+'\n');
+    carta+='\n';
+  }
+  carta+='Con cariño,\n'+nombre+' — Día del Niño 2026\n— Irioma Promocionales';
+  cartaTexto=carta;
+  go('cal');
+}
+
+function abrirCal(tipo){
+  const planes=window._planes||[];
+  let gcDesc='Hace un año, en la exhibición del Día del Niño de Irioma Promocionales, te escribiste una carta.\n\n';
+  if(planes.length){
+    gcDesc+='Te prometiste estos 3 planes:\n';
+    planes.forEach(function(p,i){gcDesc+=(i+1)+'. '+p+'\n';});
+    gcDesc+='\n¿Cuál cumpliste? ¿Cuál está en proceso? ¿Cuál cambió?';
+  }
+  gcDesc+='\n\n— Irioma Promocionales';
+  const titulo=encodeURIComponent('Mi carta al niño interior — Día del Niño 2026');
+  const detalle=encodeURIComponent(gcDesc);
+  const lugar=encodeURIComponent('Irioma Promocionales, Costa Rica');
+  if(tipo==='google'){
+    const url='https://calendar.google.com/calendar/render?action=TEMPLATE'+
+      '&text='+titulo+'&dates=20270801/20270802&details='+detalle+'&location='+lugar;
+    const a=document.createElement('a');
+    a.href=url;a.target='_blank';a.rel='noopener';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(function(){go('fin');},600);
+  }else{
+    const fullDesc=cartaTexto||gcDesc;
+    let extra='';
+    if(planes.length){
+      extra='\n\n---\nHace un año te prometiste estos 3 planes:\n';
+      planes.forEach(function(p,i){extra+=(i+1)+'. '+p+'\n';});
+      extra+='\n¿Cuál cumpliste? ¿Cuál está en proceso? ¿Cuál cambió?\n';
+    }
+    const contenido=fullDesc+extra+'\n\n— Irioma Promocionales | korre.cr';
+    const desc=contenido.split('\n').join('\\n').split(',').join('\\,').split(';').join('\\;');
+    const ics=[
+      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Irioma//ES',
+      'BEGIN:VEVENT','UID:'+Date.now()+'@irioma.cr',
+      'DTSTART;VALUE=DATE:20270801','DTEND;VALUE=DATE:20270802',
+      'SUMMARY:Mi carta al niño interior - Día del Niño 2026',
+      'DESCRIPTION:'+desc,
+      'LOCATION:Irioma Promocionales',
+      'END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));
+    a.download='carta-nino-2027.ics';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(function(){go('fin');},600);
+  }
+}
+</script>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+// Service Worker
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/Exhibici-n-2026/sw.js').catch(function(){});
+  navigator.serviceWorker.addEventListener('controllerchange',function(){window.location.reload();});
+}
+</script>
+</body>
+</html>
