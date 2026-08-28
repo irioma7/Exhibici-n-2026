@@ -2,6 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Irioma · Día del Niño 2026</title>
 <style>
@@ -119,18 +122,47 @@ const IDX_KEY       = 'irioma-nino-INDEX';
 
 <!-- REVEAL -->
 <div id="yt-player-div" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;"></div>
-<div id="s-rev" class="sc" style="background:#040E09;padding:0;position:relative;overflow:hidden;min-height:100vh;">
-  <div id="rev-bg" style="position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(3px) brightness(0.22);transform:scale(1.05);"></div>
-  <div id="rev-cd" style="position:relative;z-index:2;text-align:center;padding:24px;">
-    <div style="color:rgba(255,255,255,0.5);font-size:14px;letter-spacing:3px;margin-bottom:8px;">TU FOTO APARECE EN...</div>
-    <div id="cd-num" style="font-size:120px;font-weight:800;color:#F59E0B;line-height:1;animation:pls 1s ease-in-out infinite;">3</div>
+<div id="s-rev" class="sc" style="background:#040E09;padding:0;position:relative;overflow:hidden;min-height:100vh;justify-content:center;">
+  <style>
+    .rev-phase{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center;transition:opacity 1s ease;opacity:0;z-index:2;}
+    .rev-phase.on{display:flex;}
+    #rev-img{width:80%;max-width:310px;max-height:54vh;object-fit:cover;border-radius:18px;border:3px solid #F59E0B;display:block;margin:0 auto;transform:scale(1.12);transition:transform 2s ease, opacity 1.5s ease;opacity:0;}
+    #rev-img.shown{transform:scale(1);opacity:1;}
+    #rev-name{color:rgba(255,255,255,0.85);font-size:22px;font-weight:300;letter-spacing:4px;margin-top:18px;opacity:0;transition:opacity 1s ease;text-transform:uppercase;}
+    #rev-final{color:#F59E0B;font-size:18px;font-weight:700;margin-top:10px;opacity:0;transition:opacity 1s ease;}
+  </style>
+  <div id="rev-bg" style="position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(3px) brightness(0.18);transform:scale(1.05);z-index:1;"></div>
+
+  <!-- Fase 1: Cuenta regresiva -->
+  <div id="rev-p1" class="rev-phase">
+    <div style="color:rgba(255,255,255,0.4);font-size:13px;letter-spacing:3px;margin-bottom:12px;">TU FOTO APARECE EN...</div>
+    <div id="cd-num" style="font-size:120px;font-weight:800;color:#F59E0B;line-height:1;animation:pls 1s ease-in-out infinite;">4</div>
   </div>
-  <div id="rev-ph" style="position:relative;z-index:2;text-align:center;display:none;padding:24px;width:100%;box-sizing:border-box;">
-    <div style="color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:3px;margin-bottom:10px;text-transform:uppercase;">Entonces...</div>
-    <img id="rev-img" style="width:78%;max-width:300px;max-height:52vh;object-fit:cover;border-radius:18px;border:3px solid #F59E0B;display:block;margin:0 auto 14px;animation:fi .7s ease;"/>
-    <div id="rev-gr" style="color:#fff;font-size:20px;font-weight:800;margin-bottom:4px;"></div>
-    <div style="color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:20px;">Ahora tomate una selfie para tu tarjeta</div>
-    <button class="bt bt-am" onclick="stopMusic();go('si')" style="width:auto;padding:13px 28px;">Tomarme la selfie →</button>
+
+  <!-- Fase 2: "Antes de ser quien sos hoy..." -->
+  <div id="rev-p2" class="rev-phase">
+    <div style="color:rgba(255,255,255,0.9);font-size:26px;font-weight:300;line-height:1.5;letter-spacing:0.5px;max-width:280px;">
+      Antes de ser<br>quien sos hoy...
+    </div>
+  </div>
+
+  <!-- Fase 3: "...eras este niño." -->
+  <div id="rev-p3" class="rev-phase">
+    <div style="color:#F59E0B;font-size:28px;font-weight:700;line-height:1.4;max-width:260px;">
+      ...eras este niño.
+    </div>
+  </div>
+
+  <!-- Fase 4: Foto + nombre + texto final -->
+  <div id="rev-p4" class="rev-phase" style="padding:20px;">
+    <img id="rev-img" alt="Tu foto de infancia"/>
+    <div id="rev-name"></div>
+    <div id="rev-final">Hoy volviste a serlo. 🧒</div>
+  </div>
+
+  <!-- Fase 5: Botón -->
+  <div id="rev-p5" class="rev-phase" style="justify-content:flex-end;padding-bottom:48px;">
+    <button class="bt bt-am" onclick="stopMusic();go('si')" style="width:auto;padding:14px 32px;font-size:15px;">Tomarme la selfie →</button>
   </div>
 </div>
 
@@ -366,9 +398,84 @@ async function selEntry(i){
   document.getElementById('conf-cont').style.display='block';
 }
 
+function showPhase(id, fadeIn=true){
+  const el=document.getElementById(id);
+  el.classList.add('on');
+  if(fadeIn) setTimeout(()=>{el.style.opacity='1';},30);
+  else el.style.opacity='1';
+}
+function hidePhase(id, cb){
+  const el=document.getElementById(id);
+  el.style.opacity='0';
+  setTimeout(()=>{el.classList.remove('on');el.style.opacity='0';if(cb)cb();},1000);
+}
+
+function startReveal(){
+  ['rev-p1','rev-p2','rev-p3','rev-p4','rev-p5'].forEach(function(id){
+    const el=document.getElementById(id);
+    el.classList.remove('on');el.style.opacity='0';
+  });
+
+  // FASE 1 — Cuenta regresiva 4s
+  showPhase('rev-p1');
+  let c=4;
+  document.getElementById('cd-num').textContent=c;
+  if(st.cdt)clearInterval(st.cdt);
+  st.cdt=setInterval(function(){
+    c--;
+    if(c>0){document.getElementById('cd-num').textContent=c;}
+    else{
+      clearInterval(st.cdt);
+      // FASE 2 — "Antes de ser quien sos hoy..." 4s
+      hidePhase('rev-p1',function(){
+        showPhase('rev-p2');
+        setTimeout(function(){
+          // FASE 3 — "...eras este niño." 3.5s
+          hidePhase('rev-p2',function(){
+            showPhase('rev-p3');
+            setTimeout(function(){
+              // FASE 4 — Foto reveal 6s
+              hidePhase('rev-p3',function(){
+                if(st.child){
+                  const img=document.getElementById('rev-img');
+                  img.src=st.child;
+                }
+                const fn=(st.sel?.name||'').split(' ')[0];
+                document.getElementById('rev-name').textContent=fn.toUpperCase();
+                document.getElementById('rev-name').style.opacity='0';
+                document.getElementById('rev-final').style.opacity='0';
+                showPhase('rev-p4',false);
+                setTimeout(function(){
+                  document.getElementById('rev-p4').style.opacity='1';
+                  const img=document.getElementById('rev-img');
+                  setTimeout(function(){img.classList.add('shown');},100);
+                  // Nombre aparece en 2.5s
+                  setTimeout(function(){
+                    document.getElementById('rev-name').style.opacity='1';
+                  },2500);
+                  // Frase final aparece en 4.5s
+                  setTimeout(function(){
+                    document.getElementById('rev-final').style.opacity='1';
+                  },4500);
+                  // FASE 5 — Botón 6s después
+                  setTimeout(function(){
+                    showPhase('rev-p5');
+                  },6000);
+                },80);
+              });
+            },3500);
+          });
+        },4000);
+      });
+    }
+  },1000);
+}
+
 function confirmPhoto(){
   go('rev');
+  if(st.child)document.getElementById('rev-bg').style.backgroundImage='url('+st.child+')';
   playMusic();
+  startReveal();
   if(st.child)document.getElementById('rev-bg').style.backgroundImage=`url(${st.child})`;
   document.getElementById('rev-cd').style.display='block';
   document.getElementById('rev-ph').style.display='none';
@@ -803,12 +910,8 @@ function abrirCal(tipo){
     }
     const contenido=fullDesc+extra+'\n\n— Irioma Promocionales | korre.cr';
     // Escapar caracteres especiales para ICS
-    const desc=contenido
-      .replace(/\\/g,'\\\\')
-      .replace(/;/g,'\\;')
-      .replace(/,/g,'\\,')
-      .replace(/
-/g,'\\n');
+    // Escapar para ICS sin regex problemáticos
+  const desc=contenido.split('\n').join('\\n').split(',').join('\\,').split(';').join('\\;');
 
     const ics=[
       'BEGIN:VCALENDAR',
@@ -838,5 +941,17 @@ function abrirCal(tipo){
 </script>
 
 <script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+// Service Worker — fuerza actualización automática
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/Exhibici-n-2026/sw.js')
+    .catch(function(){});
+  // Detectar nueva versión y recargar
+  navigator.serviceWorker.addEventListener('controllerchange',function(){
+    window.location.reload();
+  });
+}
+</script>
 </body>
 </html>
