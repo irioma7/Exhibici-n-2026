@@ -156,7 +156,7 @@ const IDX_KEY       = 'irioma-nino-INDEX';
 
   <!-- Fase 1: Cuenta regresiva -->
   <div id="rev-p1" class="rev-phase">
-    <div style="color:rgba(255,255,255,0.4);font-size:13px;letter-spacing:3px;margin-bottom:12px;">TU FOTO APARECE EN...</div>
+    <div style="color:rgba(255,255,255,0.4);font-size:13px;letter-spacing:3px;margin-bottom:12px;">UN MOMENTO ESPECIAL ESTÁ POR COMENZAR...</div>
     <div id="cd-num" style="font-size:120px;font-weight:800;color:#F59E0B;line-height:1;animation:pls 1s ease-in-out infinite;">4</div>
   </div>
 
@@ -693,10 +693,10 @@ async function makeCard(){
     const[bg,ch,se]=await Promise.all([load(BG_CARD),load(st.child),load(st.selfie)]);
     // Dibujar fondo
     ctx.drawImage(bg,0,0,W,H);
-    // Foto infancia → cuadro arriba derecha
-    dCoverAt(ctx,ch,757,612,535,535,-11.7);
-    // Selfie → cuadro abajo izquierda
-    dCoverAt(ctx,se,328,1292,545,545,10);
+    // Foto infancia → cuadro arriba derecha (-11.26°, tamaño 480)
+    dCoverAt(ctx,ch,757,612,480,480,-11.26);
+    // Selfie → cuadro abajo izquierda (-10.18°, mismo sentido que P1)
+    dCoverAt(ctx,se,328,1291,480,480,-10.18);
     st.card=cv.toDataURL('image/jpeg',0.93);
     document.getElementById('card-img').src=st.card;
     document.getElementById('dl-msg').style.display='none';
