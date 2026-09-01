@@ -692,11 +692,11 @@ async function makeCard(){
     ctx.drawImage(bg,0,0,W,H);
     // Foto infancia → cuadro arriba derecha (-11.26°, tamaño 480)
     // yOff=ih*0.2 muestra la parte superior de la foto donde suele estar la cara
-    const sc_ch=Math.max(480/ch.width,480/ch.height);
+    const sc_ch=Math.max(600/ch.width,600/ch.height);
     const ih_ch=ch.height*sc_ch;
-    dCoverAt(ctx,ch,757,612,480,480,-11.26,ih_ch*0.22);
+    dCoverAt(ctx,ch,757,612,600,600,-11.26,ih_ch*0.18);
     // Selfie → cuadro abajo izquierda (-10.18°, mismo sentido que P1)
-    dCoverAt(ctx,se,328,1291,480,480,-10.18);
+    dCoverAt(ctx,se,328,1291,600,600,-10.18);
     st.card=cv.toDataURL('image/jpeg',0.93);
     document.getElementById('card-img').src=st.card;
     document.getElementById('dl-msg').style.display='none';
